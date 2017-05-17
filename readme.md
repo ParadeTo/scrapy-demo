@@ -30,3 +30,52 @@ CREATE TABLE `website` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
+
+# sqlalchemy
+对象关系映射(Object Relational Mapping, ORM)工具
+
+## 使用示例
+
+```
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+# 初始化数据库连接:
+engine = create_engine('mysql+mysqldb://root:123456@localhost:3306/scrapy-demo?charset=utf8')
+# 创建DBSession类型:
+DBSession = sessionmaker(bind=engine)
+
+...
+
+from sqlalchemy import Column, String , DateTime, Integer
+from sqlalchemy.ext.declarative import declarative_base
+
+# 创建对象的基类:
+Base = declarative_base()
+
+class Website(Base):
+    __tablename__ = 'website'
+
+    # 表的结构:
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    allow_domains = Column(String)
+    start_urls = Column(String)
+    rules_to_follow = Column(String)
+    rules_to_parse = Column(String)
+    title_css = Column(String)
+    content_css = Column(String)
+    publish_time_css = Column(String)
+
+    def __str__(self):
+        return self.name
+
+...
+
+
+db = DBSession()
+
+websites = db.query(Website)
+for website in websites:
+    print(website)
+```
