@@ -20,15 +20,16 @@ DROP TABLE IF EXISTS `website`;
 CREATE TABLE `website` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(50) NOT NULL COMMENT '网站名称',
-  `allow_domains` varchar(500) DEFAULT NULL COMMENT '以;分隔',
+  `allow_domains` varchar(500) DEFAULT NULL COMMENT ';进行分割',
   `start_urls` varchar(500) DEFAULT NULL COMMENT '开始的url，以;分隔',
-  `rules_to_follow` varchar(1000) DEFAULT NULL COMMENT '继续跟踪的链接正则表达式，;分隔',
-  `rules_to_parse` varchar(1000) DEFAULT NULL COMMENT '解析数据链接的正则表达式，;分隔，一般只有一个',
+  `rules_to_follow` varchar(1000) DEFAULT NULL COMMENT '继续跟踪的链接正则表达式',
+  `rules_to_parse` varchar(1000) DEFAULT NULL COMMENT '解析数据链接的正则表达式',
   `title_css` varchar(255) DEFAULT NULL COMMENT '提取标题的css选择器',
   `content_css` varchar(255) DEFAULT NULL COMMENT '提取内容的css选择器',
   `publish_time_css` varchar(255) DEFAULT NULL COMMENT '提取发布时间的css选择器',
+  `enable` smallint(6) NOT NULL DEFAULT '1' COMMENT '是否启用',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 ```
 
 # sqlalchemy
@@ -79,3 +80,7 @@ websites = db.query(Website)
 for website in websites:
     print(website)
 ```
+
+
+// TODO 
+start_urls 不从redis中读取

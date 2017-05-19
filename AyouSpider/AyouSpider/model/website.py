@@ -19,6 +19,7 @@ class Website(Base):
     title_css = Column(String)
     content_css = Column(String)
     publish_time_css = Column(String)
+    enable = Column(Integer)
 
     def __str__(self):
         return self.name
