@@ -12,6 +12,7 @@ class Website(Base):
     # 表的结构:
     id = Column(Integer, primary_key=True)
     name = Column(String)
+    spider_name = Column(String)
     allow_domains = Column(String)
     start_urls = Column(String)
     rules_to_follow = Column(String)
